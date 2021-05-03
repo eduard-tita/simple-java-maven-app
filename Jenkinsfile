@@ -18,7 +18,11 @@ pipeline {
         }
         stage('IQ Policy Evaluation') {
             steps {
-                nexusPolicyEvaluation advancedProperties: '', failBuildOnNetworkError: false, iqApplication: selectedApplication('local-iq-app'), iqStage: 'build', jobCredentialsId: ''
+                nexusPolicyEvaluation advancedProperties: '', 
+                    failBuildOnNetworkError: false, 
+                    iqApplication: selectedApplication('local-iq-app'), 
+                    iqStage: 'build', 
+                    jobCredentialsId: ''
             }
         }
     }
