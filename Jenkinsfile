@@ -21,7 +21,8 @@ pipeline {
                 nexusPolicyEvaluation advancedProperties: '', 
                     failBuildOnNetworkError: false, 
                     iqApplication: selectedApplication('local-iq-app'), 
-                    iqStage: 'build'
+                    iqStage: 'build',
+                    iqScanPatterns: [[scanPattern: '**/*.jar'], [scanPattern: '**/*.war']]
             }
         }
     }
