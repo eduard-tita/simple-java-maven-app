@@ -18,8 +18,10 @@ pipeline {
         }
         stage('IQ Policy Evaluation') {
             steps {
-                nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: selectedApplication('local-iq-app'), iqStage: 'build', 
-                    iqScanPatterns: [[scanPattern: '*.csproj']]
+                nexusPolicyEvaluation advancedProperties: '', 
+                    failBuildOnNetworkError: false, 
+                    iqApplication: selectedApplication('local-iq-app'), 
+                    iqStage: 'build'
             }
         }
     }
