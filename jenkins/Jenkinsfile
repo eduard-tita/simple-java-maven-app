@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Policy Evaluation') {
             steps {
-                nexusPolicyEvaluation iqApplication: 'simple-java-maven-app'
+                nexusPolicyEvaluation iqApplication: 'simple-java-maven-app', iqStage: 'build'
             }
         }
     }
