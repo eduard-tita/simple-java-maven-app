@@ -31,7 +31,7 @@ jobs:
 
       - name: IQ Evaluate
         id: evaluate
-        uses: sonatype/github-actions/evaluate@v1
+        uses: sonatype/actions/evaluate@v1
         with:
           username: ${{ env.USERNAME }}
           password: ${{ env.PASSWORD }}
