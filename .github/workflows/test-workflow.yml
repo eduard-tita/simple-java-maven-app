@@ -27,9 +27,11 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Determine IQ Stage
-        run: |
-          [ "$GITHUB_REF_NAME" = "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
+      - name: Determine Repository Name
+        run: |          
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          echo "IQ_APP_ID=${repo_name}"
+          echo "IQ_APP_ID=${repo_name}" >> $GITHUB_ENV
 
       - name: Sonatype Evaluate
         uses: sonatype/actions/evaluate@v1
@@ -37,6 +39,5 @@ jobs:
           username: ${{ secrets.ITSA_USERNAME }}
           password: ${{ secrets.ITSA_PASSWORD }}
           iq-server-url: https://int-test.sonatype.app/platform/
-          application-id: et-app
-          stage: ${{ env.IQ_STAGE }}
+          application-id: ${{ env.IQ_APP_ID }}
           scan-targets: target/*.jar
