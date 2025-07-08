@@ -8,34 +8,28 @@ on:
 
 permissions: write-all
 
-env:
-  USERNAME: ${{ secrets.ITSA_USERNAME }}
-  PASSWORD: ${{ secrets.ITSA_PASSWORD }}
-  SERVER: https://int-test.sonatype.app/platform/
-  APP_ID: et-app
-
 jobs:
-  test-action:
-    name: GitHub Actions Test
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        id: checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-      - name: IQ Evaluate
-        id: evaluate
+      - name: Sonatype Evaluate
         uses: sonatype/actions/evaluate@v1
         with:
-          username: ${{ env.USERNAME }}
-          password: ${{ env.PASSWORD }}
-          iq-server-url: ${{ env.SERVER }}
-          application-id: ${{ env.APP_ID }}
+          username: ${{ secrets.ITSA_USERNAME }}
+          password: ${{ secrets.ITSA_PASSWORD }}
+          iq-server-url: https://int-test.sonatype.app/platform/
+          application-id: et-app
           stage: build
           scan-targets: pom.xml
