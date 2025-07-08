@@ -27,6 +27,12 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+      - name: Determine IQ Stage
+        run: |
+          [ "$GITHUB_REF_NAME" = "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
+          echo "IQ_STAGE=${IQ_STAGE}"
+          echo "IQ_STAGE=${IQ_STAGE}" >> $GITHUB_ENV
+
       - name: Determine Repository Name
         run: |          
           repo_name="${GITHUB_REPOSITORY#*/}"
@@ -40,4 +46,5 @@ jobs:
           password: ${{ secrets.ITSA_PASSWORD }}
           iq-server-url: https://int-test.sonatype.app/platform/
           application-id: ${{ env.IQ_APP_ID }}
+          stage: ${{ env.IQ_STAGE }}
           scan-targets: target/*.jar
