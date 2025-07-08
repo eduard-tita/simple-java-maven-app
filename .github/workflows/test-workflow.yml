@@ -29,7 +29,7 @@ jobs:
 
       - name: Determine IQ Stage
         run: |
-          [ "$GITHUB_REF_NAME" -eq "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
+          [ "$GITHUB_REF_NAME" = "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
 
       - name: Sonatype Evaluate
         uses: sonatype/actions/evaluate@v1
