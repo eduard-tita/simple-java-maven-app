@@ -32,4 +32,4 @@ jobs:
           iq-server-url: https://int-test.sonatype.app/platform/
           application-id: et-app
           stage: build
-          scan-targets: pom.xml
+          scan-targets: target/*.jar
