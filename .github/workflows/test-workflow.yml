@@ -30,6 +30,7 @@ jobs:
       - name: Determine IQ Stage
         run: |
           [ "$GITHUB_REF_NAME" = "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
+          echo "IQ_STAGE=${IQ_STAGE}"
 
       - name: Sonatype Evaluate
         uses: sonatype/actions/evaluate@v1
