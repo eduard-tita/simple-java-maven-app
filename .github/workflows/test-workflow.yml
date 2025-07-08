@@ -28,7 +28,8 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Determine IQ Stage
-        run: [ "$GITHUB_REF_NAME" -eq "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
+        run: |
+          [ "$GITHUB_REF_NAME" -eq "master" ] && IQ_STAGE="build" || IQ_STAGE="develop"
 
       - name: Sonatype Evaluate
         uses: sonatype/actions/evaluate@v1
